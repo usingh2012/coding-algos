@@ -1,0 +1,48 @@
+function wait(secs) {
+  return new Promise(function (resolve, reject) {
+    let timing = 2;
+    setTimeout(function waiting() {
+      timing = secs > 2 ? 2 : secs;
+      console.log(`waited ${secs} seconds`);
+      resolve();
+    }, timing * 1000);
+  });
+}
+
+// function createQueue() {
+//   const maxSize = 3;
+//   const funcQueue = [];
+//   let currentCounter = 0;
+//   return function (args) {
+//     return new Promise((resolve, reject) => {
+//       if (currentCounter < 3) {
+//         runner(resolve, args);
+//       } else {
+//         console.log("Please wait ...");
+//         funcQueue.push({
+//           resolve,
+//           args,
+//         });
+//       }
+//     });
+
+//     function runner(resolve, args) {
+//       currentCounter++;
+//       wait(args).then(function (resp) {
+//         resolve(resp);
+//         currentCounter--;
+//         if (currentCounter < maxSize && funcQueue.length) {
+//           let funcQueueParams = funcQueue.unshift();
+//           runner(funcQueueParams.resolve, funcQueueParams.args);
+//         }
+//       });
+//     }
+//   };
+// }
+
+// const funcRunner = createQueue();
+
+// for (let i = 0; i < 10; i++) {
+//   funcRunner(i);
+// }
+

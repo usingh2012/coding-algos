@@ -1,0 +1,35 @@
+function minWindow(s1, s2) {
+  let str1 = s1,
+    str2 = s2,
+    s1Index = 0,
+    s2Index = 0;
+
+  let minSubSequenceLength = Number.POSITIVE_INFINITY,
+    minSub = "";
+  while (s1Index < str1.length) {
+    if (str1[s1Index] === str2[s2Index]) {
+      if (s2Index === str2.length - 1) {
+        let end = s1Index;
+        while (s2Index >= 0) {
+          if (str1[s1Index] === str2[s2Index]) {
+            if (s2Index === 0) {
+              let minLen = end - s1Index + 1;
+              if (minLen < minSubSequenceLength) {
+                minSubSequenceLength = minLen;
+                minSub = str1.substring(s1Index, end + 1);
+              }
+              s1Index++;
+              break;
+            }
+            s2Index--;
+          }
+          s1Index--;
+        }
+        continue;
+      }
+      s2Index++;
+    }
+    s1Index++;
+  }
+  return minSub;
+}
